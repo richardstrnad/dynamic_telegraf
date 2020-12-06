@@ -1,0 +1,50 @@
+version: "3.8"
+services:
+  dt-grafana:
+    restart: always
+    image: "grafana/grafana:7.3.4"
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ALLOW_EMBEDDING=true
+      - GF_PANELS_DISABLE_SANITIZE_HTML=true
+    volumes:
+      - ./grafana/storage:/var/lib/grafana
+
+  dt-influxdb:
+    restart: always
+    image: "influxdb:1.8.3-alpine"
+    ports:
+      - 8086:8086
+    volumes:
+      - ./influxdb/storage:/var/lib/influxdb
+      - ./influxdb/config/influxdb.conf:/etc/influxdb/influxdb.conf:ro
+    environment:
+      - INFLUXDB_DB=DT
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=admin
+      - INFLUXDB_USER=DT
+      - INFLUXDB_USER_PASSWORD=admin
+    command: ["-config", "/etc/influxdb/influxdb.conf"]
+
+  dt-telegraf:
+    restart: always
+    build:
+      context: ./telegraf
+      dockerfile: Dockerfile
+    environment:
+      - BACKEND_URL=dt-backend:5000
+    volumes:
+      - ./telegraf/container/:/etc/telegraf/
+    command: ["--config-directory", "/etc/telegraf/telegraf.d"]
+
+  dt-backend:
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8077:5000
+    command: ["python3", "app.py"]
+
