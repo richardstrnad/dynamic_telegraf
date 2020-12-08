@@ -1,0 +1,711 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": "-- Grafana --",
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 1,
+    "iteration": 1607415164770,
+    "links": [],
+    "panels": [
+        {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 8,
+            "panels": [],
+            "title": "Update",
+            "type": "row"
+        },
+        {
+            "datasource": null,
+            "fieldConfig": {
+                "defaults": {
+                    "custom": {}
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 8,
+                "x": 0,
+                "y": 1
+            },
+            "id": 4,
+            "options": {
+                "content": "<h1>Add a host</h1>\n\n<form action=\"http://localhost:8077/api/urls\" method=\"post\" target=\"_blank\">\n  <label for=\"url\">Host:</label><br>\n  <input type=\"text\" id=\"url\" name=\"url\"><br>\n  <input type=\"submit\" value=\"Submit\">\n</form>",
+                "mode": "html"
+            },
+            "pluginVersion": "7.3.4",
+            "targets": [
+                {
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "null"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "value"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": []
+                }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Add Host",
+            "type": "text"
+        },
+        {
+            "collapsed": true,
+            "datasource": null,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 7
+            },
+            "id": 12,
+            "panels": [],
+            "title": "Ping",
+            "type": "row"
+        },
+        {
+            "datasource": null,
+            "fieldConfig": {
+                "defaults": {
+                    "custom": {},
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ping.result_code"
+                        },
+                        "properties": [
+                            {
+                                "id": "mappings",
+                                "value": [
+                                    {
+                                        "from": "",
+                                        "id": 1,
+                                        "text": "OK",
+                                        "to": "",
+                                        "type": 1,
+                                        "value": "0"
+                                    },
+                                    {
+                                        "from": "",
+                                        "id": 2,
+                                        "text": "ERROR",
+                                        "to": "",
+                                        "type": 1,
+                                        "value": "1"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "thresholds",
+                                "value": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": null
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 1
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "Status"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ping.average_response_ms"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Response ms"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ping.ttl"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "TTL"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ping.percent_packet_loss"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Packet loss"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 8,
+                "x": 0,
+                "y": 8
+            },
+            "id": 2,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "last"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "textMode": "auto"
+            },
+            "pluginVersion": "7.3.4",
+            "repeat": "URL",
+            "scopedVars": {
+                "URL": {
+                    "selected": false,
+                    "text": "8.8.8.8",
+                    "value": "8.8.8.8"
+                }
+            },
+            "targets": [
+                {
+                    "groupBy": [],
+                    "measurement": "ping",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT \"result_code\", \"average_response_ms\", \"ttl\", mean(\"percent_packet_loss\") FROM \"ping\" WHERE (\"url\" = 'example.org') AND $timeFilter",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "result_code"
+                                ],
+                                "type": "field"
+                            }
+                        ],
+                        [
+                            {
+                                "params": [
+                                    "average_response_ms"
+                                ],
+                                "type": "field"
+                            }
+                        ],
+                        [
+                            {
+                                "params": [
+                                    "ttl"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "url",
+                            "operator": "=~",
+                            "value": "/^$URL$/"
+                        }
+                    ]
+                }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "$URL",
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "fieldConfig": {
+                "defaults": {
+                    "custom": {},
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ping.result_code"
+                        },
+                        "properties": [
+                            {
+                                "id": "mappings",
+                                "value": [
+                                    {
+                                        "from": "",
+                                        "id": 1,
+                                        "text": "OK",
+                                        "to": "",
+                                        "type": 1,
+                                        "value": "0"
+                                    },
+                                    {
+                                        "from": "",
+                                        "id": 2,
+                                        "text": "ERROR",
+                                        "to": "",
+                                        "type": 1,
+                                        "value": "1"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "thresholds",
+                                "value": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": null
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 1
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "Status"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ping.average_response_ms"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Response ms"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ping.ttl"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "TTL"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ping.percent_packet_loss"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Packet loss"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 8,
+                "x": 8,
+                "y": 8
+            },
+            "id": 13,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "last"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "textMode": "auto"
+            },
+            "pluginVersion": "7.3.4",
+            "repeatIteration": 1607415164770,
+            "repeatPanelId": 2,
+            "scopedVars": {
+                "URL": {
+                    "selected": false,
+                    "text": "example.org",
+                    "value": "example.org"
+                }
+            },
+            "targets": [
+                {
+                    "groupBy": [],
+                    "measurement": "ping",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT \"result_code\", \"average_response_ms\", \"ttl\", mean(\"percent_packet_loss\") FROM \"ping\" WHERE (\"url\" = 'example.org') AND $timeFilter",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "result_code"
+                                ],
+                                "type": "field"
+                            }
+                        ],
+                        [
+                            {
+                                "params": [
+                                    "average_response_ms"
+                                ],
+                                "type": "field"
+                            }
+                        ],
+                        [
+                            {
+                                "params": [
+                                    "ttl"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "url",
+                            "operator": "=~",
+                            "value": "/^$URL$/"
+                        }
+                    ]
+                }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "$URL",
+            "type": "stat"
+        },
+        {
+            "datasource": null,
+            "fieldConfig": {
+                "defaults": {
+                    "custom": {},
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ping.result_code"
+                        },
+                        "properties": [
+                            {
+                                "id": "mappings",
+                                "value": [
+                                    {
+                                        "from": "",
+                                        "id": 1,
+                                        "text": "OK",
+                                        "to": "",
+                                        "type": 1,
+                                        "value": "0"
+                                    },
+                                    {
+                                        "from": "",
+                                        "id": 2,
+                                        "text": "ERROR",
+                                        "to": "",
+                                        "type": 1,
+                                        "value": "1"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "thresholds",
+                                "value": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": null
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 1
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "Status"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ping.average_response_ms"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Response ms"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ping.ttl"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "TTL"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ping.percent_packet_loss"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Packet loss"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 8,
+                "x": 16,
+                "y": 8
+            },
+            "id": 14,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "last"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "textMode": "auto"
+            },
+            "pluginVersion": "7.3.4",
+            "repeatIteration": 1607415164770,
+            "repeatPanelId": 2,
+            "scopedVars": {
+                "URL": {
+                    "selected": false,
+                    "text": "google.com",
+                    "value": "google.com"
+                }
+            },
+            "targets": [
+                {
+                    "groupBy": [],
+                    "measurement": "ping",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT \"result_code\", \"average_response_ms\", \"ttl\", mean(\"percent_packet_loss\") FROM \"ping\" WHERE (\"url\" = 'example.org') AND $timeFilter",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "result_code"
+                                ],
+                                "type": "field"
+                            }
+                        ],
+                        [
+                            {
+                                "params": [
+                                    "average_response_ms"
+                                ],
+                                "type": "field"
+                            }
+                        ],
+                        [
+                            {
+                                "params": [
+                                    "ttl"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "url",
+                            "operator": "=~",
+                            "value": "/^$URL$/"
+                        }
+                    ]
+                }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "$URL",
+            "type": "stat"
+        }
+    ],
+    "refresh": "10s",
+    "schemaVersion": 26,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+        "list": [
+            {
+                "allValue": null,
+                "current": {
+                    "selected": false,
+                    "text": "All",
+                    "value": "$__all"
+                },
+                "datasource": "InfluxDB",
+                "definition": "",
+                "error": null,
+                "hide": 0,
+                "includeAll": true,
+                "label": null,
+                "multi": false,
+                "name": "URL",
+                "options": [],
+                "query": "SHOW TAG VALUES FROM \"ping\" WITH KEY = \"url\"",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "tagValuesQuery": "",
+                "tags": [],
+                "tagsQuery": "",
+                "type": "query",
+                "useTags": false
+            }
+        ]
+    },
+    "time": {
+        "from": "now-15m",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Ping",
+    "uid": "0i7Zo3AMk",
+    "version": 8
+}
